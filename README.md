@@ -1,27 +1,61 @@
-# Next.js + Tailwind CSS Example
+# Birthle
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+A Wordle-style game where you guess a birth date. Enter a day and month as four digits (`DDMM`) and use the coloured tiles to close in on the answer in six guesses.
 
-## Deploy your own
+<p align="center">
+  <img src="docs/screenshots/game-desktop.png" alt="Birthle game board on desktop with coloured guesses" width="620" />
+  <img src="docs/screenshots/win-mobile.png" alt="Birthle win state on mobile" width="220" />
+</p>
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## How to play
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- Type a date as `DDMM` — for example, `1501` is 15 January.
+- Press **Enter** (or use the on-screen keypad) to submit.
+- Each digit is scored independently:
+  - <strong>Green</strong> — correct digit in the correct position.
+  - <strong>Yellow</strong> — the digit exists in the date but in a different position.
+  - <strong>Grey</strong> — the digit is not in the date.
+- Repeated digits are counted correctly: a guess cannot mark a digit yellow more times than it appears in the answer.
+- You have six guesses. The date is revealed if you run out.
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Run locally
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+npm install
+npm run dev
 ```
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+Open [http://localhost:3000](http://localhost:3000).
+
+### Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm start` | Serve the production build |
+| `npm test` | Run the scoring tests |
+
+## Tech stack
+
+- [Next.js](https://nextjs.org/) (Pages Router)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [MobX](https://mobx.js.org/) with `mobx-react-lite`
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## Project structure
+
+```text
+components/     Board, keypad, and legend
+lib/            Date scoring logic and tests
+pages/          Game page
+stores/         Puzzle state
+docs/screenshots/  README screenshots
 ```
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Notes
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- Dates use day-month order (`DDMM`), not month-day.
+- Only real dates are accepted, including 29 February.
+- The answer is chosen in the browser, so this is a casual game rather than a cheat-proof daily puzzle.

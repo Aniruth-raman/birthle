@@ -1,9 +1,18 @@
+const items = [
+  { color: 'bg-emerald-500', label: 'Correct spot' },
+  { color: 'bg-amber-400', label: 'Wrong spot' },
+  { color: 'bg-slate-700', label: 'Not in date' },
+]
+
 export default function ColorBox() {
-    return (
-        <div className="mb-2 grid grid-cols-3 gap-3">
-            < div className="grid h-16 w-16 bg-yellow-400 items-center text-center" >Partial Guess</div>
-            < div className="flex h-16 w-16 bg-green-400 items-center text-center" >Correct Guess</div>
-            < div className="flex h-16 w-16 bg-black items-center text-center text-white" >Wrong Guess</div>
-        </div >
-    )
+  return (
+    <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-400">
+      {items.map(({ color, label }) => (
+        <span key={label} className="flex items-center gap-1.5">
+          <span className={`h-3 w-3 rounded-sm ${color}`} />
+          {label}
+        </span>
+      ))}
+    </div>
+  )
 }
